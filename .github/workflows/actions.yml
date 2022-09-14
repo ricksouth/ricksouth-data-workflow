@@ -2,7 +2,7 @@ name: Update data via Python
 
 on:
   schedule:
-    - cron: '*/2 * * * *'
+    - cron: '* * * * *'
 
 jobs:
   build:

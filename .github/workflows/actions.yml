@@ -1,8 +1,8 @@
 name: Update data via Python
 
 on:
-  schedule:
-    - cron: '* * * * *'
+  issue_comment:
+    types: [created, deleted]
 
 jobs:
   build:

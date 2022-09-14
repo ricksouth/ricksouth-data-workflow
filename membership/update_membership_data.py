@@ -56,17 +56,17 @@ def main():
 
 	combinedlist = naturalsort(githubsponsors + kofimembers + patrons)
 
-	combined = {}
+	combinedspecific = {}
 	for member in combinedlist:
 		if member in githubsponsors:
-			combined[member] = "github"
+			combinedspecific[member] = "github"
 		elif member in kofimembers:
-			combined[member] = "kofi"
+			combinedspecific[member] = "kofi"
 		elif member in patrons:
-			combined[member] = "patreon"
+			combinedspecific[member] = "patreon"
 
 	dataout["combined"] = combinedlist
-	dataout["combined_specific"] = combined
+	dataout["combined_specific"] = combinedspecific
 
 	with open("." + sep + "membership" + sep + "members.json", "w") as memberfile:
 		memberfile.write(json.dumps(dataout, indent=4))

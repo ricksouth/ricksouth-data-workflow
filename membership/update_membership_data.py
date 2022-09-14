@@ -141,5 +141,8 @@ def naturalsort(l):
 	alphanum_key = lambda key: [ convert(c) for c in re.split('([0-9]+)', key) ] 
 	return sorted(l, key = alphanum_key)
 
+def setVariables():
+	return
+
 if __name__ == "__main__":
 	main()

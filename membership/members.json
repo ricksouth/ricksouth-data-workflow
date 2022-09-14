@@ -2,9 +2,7 @@
     "github": [
         "aternosorg"
     ],
-    "kofi": [
-        "John Doe"
-    ],
+    "kofi": [],
     "patreon": [
         "Adam E",
         "Alister",
@@ -23,7 +21,6 @@
         "Alister",
         "aternosorg",
         "Cherriesaurus",
-        "John Doe",
         "Kreezxil",
         "limpjellyfish",
         "Markus B.",
@@ -38,7 +35,6 @@
         "Alister": "patreon",
         "aternosorg": "github",
         "Cherriesaurus": "patreon",
-        "John Doe": "kofi",
         "Kreezxil": "patreon",
         "limpjellyfish": "patreon",
         "Markus B.": "patreon",

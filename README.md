@@ -1,5 +1,5 @@
 # ricksouth-data-workflow
-A repository containing Python scripts which will automatically update data files with Github Actions.
+A repository containing Python scripts which will automatically update data files via Github Actions.
 
  _Should_ run every hour.
 

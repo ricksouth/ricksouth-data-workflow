@@ -2,7 +2,9 @@
     "github": [
         "aternosorg"
     ],
-    "kofi": [],
+    "kofi": [
+        "John Doe"
+    ],
     "patreon": [
         "Adam E",
         "Alister",
@@ -21,6 +23,7 @@
         "Alister",
         "aternosorg",
         "Cherriesaurus",
+        "John Doe",
         "Kreezxil",
         "limpjellyfish",
         "Markus B.",
@@ -29,5 +32,20 @@
         "Robert Gilbert",
         "Sija",
         "Tyler Behl"
-    ]
+    ],
+    "combined_specific": {
+        "Adam E": "patreon",
+        "Alister": "patreon",
+        "aternosorg": "github",
+        "Cherriesaurus": "patreon",
+        "John Doe": "kofi",
+        "Kreezxil": "patreon",
+        "limpjellyfish": "patreon",
+        "Markus B.": "patreon",
+        "Michael W. S.": "patreon",
+        "Mir3JonCZ": "patreon",
+        "Robert Gilbert": "patreon",
+        "Sija": "patreon",
+        "Tyler Behl": "patreon"
+    }
 }

@@ -55,7 +55,7 @@ def main():
 	dataout["patreon"] = patrons
 	dataout["combined"] = naturalsort(githubsponsors + kofimembers + patrons)
 
-	with open("membership" + sep + "members.json", "w") as memberfile:
+	with open("." + sep + "membership" + sep + "members.json", "w") as memberfile:
 		memberfile.write(json.dumps(dataout, indent=4))
 
 	return

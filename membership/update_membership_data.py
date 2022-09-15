@@ -59,11 +59,11 @@ def main():
 	combinedspecific = {}
 	for member in combinedlist:
 		if member in githubsponsors:
-			combinedspecific[member] = "github"
+			combinedspecific[member] = "Github Sponsors"
 		elif member in kofimembers:
-			combinedspecific[member] = "kofi"
+			combinedspecific[member] = "Ko-Fi"
 		elif member in patrons:
-			combinedspecific[member] = "patreon"
+			combinedspecific[member] = "Patreon"
 
 	dataout["combined"] = combinedlist
 	dataout["combined_specific"] = combinedspecific

@@ -12,8 +12,6 @@ sep = os.path.sep
 def main():
 	print("Starting to receive Github Sponsors, Ko-Fi Members and Patreons.\n")
 
-	#setVariables()
-
 	kofimembers = []
 	githubsponsors = []
 	patrons = []
@@ -36,18 +34,15 @@ def main():
 	for kresult in kofiresult:
 		kofimembers.append(kresult.strip())
 
-	#print("Starting to get the list of Patreon patrons.")
 	patreonresult = queryPatreon()
 	for presult in patreonresult:
 		patrons.append(presult.strip())
+
 
 	githubsponsors = naturalsort(githubsponsors)
 	kofimembers = naturalsort(kofimembers)
 	patrons = naturalsort(patrons)
 
-	#print("Github sponsors: " + ", ".join(githubsponsors))
-	#print("Ko-Fi members: " + ", ".join(kofimembers))
-	#print("Patrons: " + ", ".join(patrons))
 
 	dataout = {}
 	dataout["github"] = githubsponsors
@@ -154,9 +149,6 @@ def naturalsort(l):
 	convert = lambda text: int(text) if text.isdigit() else text.lower() 
 	alphanum_key = lambda key: [ convert(c) for c in re.split('([0-9]+)', key) ] 
 	return sorted(l, key = alphanum_key)
-
-#def setVariables():
-#	return
 
 if __name__ == "__main__":
 	main()

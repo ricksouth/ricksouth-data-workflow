@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #!/usr/bin/env python
-from bs4 															import BeautifulSoup
+from bs4 							import BeautifulSoup
 import json
 import requests
 import patreon
@@ -76,24 +76,24 @@ def main():
 
 def queryGithub():
 	githubheaders = {"Authorization": "Bearer " + os.environ['GH_API']}
-	githubquery = """{
-					   user(login: "ricksouth") {
-						 ... on Sponsorable {
-						   sponsors(first: 100) {
-							 totalCount
-							 nodes {
-							   ... on User {
-								 login
-							   }
-							   ... on Organization {
-								 login
-							   }
-							 }
-						  }
-						 }
-					   }
-					 }
-				  """
+	githubquery = """
+	{  
+		user(login: "ricksouth") {
+			... on Sponsorable {
+				sponsors(first: 100) {
+					totalCount
+					nodes {
+						... on User {
+							login
+						}
+						... on Organization {
+							login
+						}
+					}
+				}
+			}
+		}
+	}"""
 
 	request = requests.post('https://api.github.com/graphql', json={'query': githubquery}, headers=githubheaders)
 	if request.status_code == 200:

@@ -92,6 +92,8 @@ def main():
 			feed["keys"].append(ymd)
 			feed["entries"][ymd] = []
 
+		feed["keys"] = naturalsort(feed["keys"])
+
 		for newmember in newmembers:
 			subelement = {}
 			subelement["name"] = newmember[0]

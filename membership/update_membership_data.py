@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 #!/usr/bin/env python
 from bs4 							import BeautifulSoup
+from datetime						import datetime
+from pytz 							import timezone
 import json
 import requests
 import patreon
@@ -11,6 +13,18 @@ sep = os.path.sep
 
 def main():
 	print("Starting to receive Github Sponsors, Ko-Fi Members and Patreons.\n")
+
+	rootpath = "."
+
+	previousmembers = {}
+	try:
+		with open(rootpath + sep + "membership" + sep + "members.json") as memberfile:
+			previousmembers = json.load(memberfile)
+	except:
+		previousmembers["github"] = []
+		previousmembers["kofi"] = []
+		previousmembers["patreon"] = []
+
 
 	kofimembers = []
 	githubsponsors = []
@@ -51,19 +65,50 @@ def main():
 
 	combinedlist = naturalsort(githubsponsors + kofimembers + patrons)
 
+	newmembers = []
 	combinedspecific = {}
 	for member in combinedlist:
 		if member in githubsponsors:
 			combinedspecific[member] = "Github Sponsors"
+			if member not in previousmembers["github"]:
+				newmembers.append([member, "github"])
 		elif member in kofimembers:
 			combinedspecific[member] = "Ko-Fi"
+			if member not in previousmembers["kofi"]:
+				newmembers.append([member, "kofi"])
 		elif member in patrons:
 			combinedspecific[member] = "Patreon"
+			if member not in previousmembers["patreon"]:
+				newmembers.append([member, "patreon"])
+
+	if len(newmembers) > 0:
+		ymd = datetime.now(timezone('Europe/Amsterdam')).strftime("%Y%m%d")
+		
+		feed = {}
+		with open(rootpath + sep + "membership" + sep + "feed.json") as feedfile:
+			feed = json.load(feedfile)
+
+		if not ymd in feed["keys"]:
+			feed["keys"].append(ymd)
+			feed["entries"][ymd] = []
+
+		for newmember in newmembers:
+			subelement = {}
+			subelement["name"] = newmember[0]
+			subelement["platform"] = newmember[1]
+
+			feed["entries"][ymd].append(subelement)
+
+		with open(rootpath + sep + "membership" + sep + "feed.json", "w") as feedfile:
+			json.dump(feed, feedfile, indent=4, sort_keys=True)
+
+		print("Updated feed.json file.")
+		
 
 	dataout["combined"] = combinedlist
 	dataout["combined_specific"] = combinedspecific
 
-	with open("." + sep + "membership" + sep + "members.json", "w") as memberfile:
+	with open(rootpath + sep + "membership" + sep + "members.json", "w") as memberfile:
 		memberfile.write(json.dumps(dataout, indent=4))
 
 	print("Finished receiving Github Sponsors, Ko-Fi Members and Patreons.")

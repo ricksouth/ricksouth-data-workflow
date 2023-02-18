@@ -173,6 +173,12 @@
                 "name": "Shana Gitnick",
                 "platform": "patreon"
             }
+        ],
+        "20230218": [
+            {
+                "name": "silver Bowsman",
+                "platform": "patreon"
+            }
         ]
     },
     "keys": [
@@ -204,6 +210,7 @@
         "20210311",
         "20210216",
         "20201211",
-        "20200606"
+        "20200606",
+        "20230218"
     ]
 }

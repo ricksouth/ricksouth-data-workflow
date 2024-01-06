@@ -1,20 +1,22 @@
 # -*- coding: utf-8 -*-
 #!/usr/bin/env python
-from bs4 							import BeautifulSoup
+# from bs4 							import BeautifulSoup
 from datetime						import datetime
 from pytz 							import timezone
+from pathlib 						import Path
 import json
 import requests
 import patreon
 import re
 import os
+import sys
 
 sep = os.path.sep
 
 def main():
 	print("Starting to receive Github Sponsors, Ko-Fi Members and Patreons.\n")
 
-	rootpath = "."
+	rootpath = str(Path(os.path.dirname(sys.argv[0])).parent)
 
 	previousmembers = {}
 	try:
@@ -44,9 +46,9 @@ def main():
 							ghlogin = ghnode['login']
 							githubsponsors.append(ghlogin)
 
-	kofiresult = queryKoFi()
-	for kresult in kofiresult:
-		kofimembers.append(kresult.strip())
+	# kofiresult = queryKoFi()
+	# for kresult in kofiresult:
+	#	kofimembers.append(kresult.strip())
 
 	patreonresult = queryPatreon()
 	for presult in patreonresult:
@@ -117,7 +119,7 @@ def main():
 	return
 
 def queryGithub():
-	githubheaders = {"Authorization": "Bearer " + os.environ['GH_API']}
+	githubheaders = {"Authorization": "bearer " + os.environ['GH_API']}
 	githubquery = """
 	{  
 		user(login: "ricksouth") {
@@ -138,6 +140,9 @@ def queryGithub():
 	}"""
 
 	request = requests.post('https://api.github.com/graphql', json={'query': githubquery}, headers=githubheaders)
+	
+	print("GitHub API response:", request.json()['message'])
+	
 	if request.status_code == 200:
 		return request.json()
 
@@ -146,23 +151,23 @@ def queryGithub():
 def queryKoFi():
 	members = []
 
-	html = requests.get(os.environ['SHEETS_URL']).text
-	soup = BeautifulSoup(html, "lxml")
+	# html = requests.get(os.environ['SHEETS_URL']).text
+	# soup = BeautifulSoup(html, "lxml")
 
-	tables = soup.find_all("table")
-	index = 0
-	for table in tables:
-		rows = [[td.text for td in row.find_all("td")] for row in table.find_all("tr")]
-		for row in rows:
-			if len(row) < 1:
-				continue
-			if row[0] == "Ko-Fi Members":
-				continue
-			if row[0] == "":
-				break
-
-			members.append(row[0])
-		break
+	# tables = soup.find_all("table")
+	# index = 0
+	# for table in tables:
+	#	rows = [[td.text for td in row.find_all("td")] for row in table.find_all("tr")]
+	#	for row in rows:
+	#		if len(row) < 1:
+	#			continue
+	#		if row[0] == "Ko-Fi Members":
+	#			continue
+	#		if row[0] == "":
+	#			break
+	#
+	#		members.append(row[0])
+	#	break
 
 	return members
 

@@ -15,7 +15,8 @@ sep = os.path.sep
 def main(mainpath):
 	print("Starting to receive Github Sponsors, Ko-Fi Members and Patreons.\n")
 
-	rootpath = mainpath + sep + "membership"
+	# rootpath = mainpath + sep + "membership"
+	rootpath = "." + sep + "membership"
 
 	previousmembers = {}
 	try:

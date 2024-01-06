@@ -141,7 +141,7 @@ def queryGithub():
 
 	request = requests.post('https://api.github.com/graphql', json={'query': githubquery}, headers=githubheaders)
 	
-	print("GitHub API response:", request.json()['message'])
+	print("GitHub API response:", request.json())
 	
 	if request.status_code == 200:
 		return request.json()

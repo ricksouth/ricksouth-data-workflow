@@ -3,7 +3,6 @@
 # from bs4 							import BeautifulSoup
 from datetime						import datetime
 from pytz 							import timezone
-from pathlib 						import Path
 import json
 import requests
 import patreon
@@ -13,14 +12,14 @@ import sys
 
 sep = os.path.sep
 
-def main():
+def main(mainpath):
 	print("Starting to receive Github Sponsors, Ko-Fi Members and Patreons.\n")
 
-	rootpath = str(Path(os.path.dirname(sys.argv[0])).parent)
+	rootpath = mainpath + sep + "membership"
 
 	previousmembers = {}
 	try:
-		with open(rootpath + sep + "membership" + sep + "members.json") as memberfile:
+		with open(rootpath + sep + "members.json") as memberfile:
 			previousmembers = json.load(memberfile)
 	except:
 		previousmembers["github"] = []
@@ -87,7 +86,7 @@ def main():
 		ymd = datetime.now(timezone('Europe/Amsterdam')).strftime("%Y%m%d")
 		
 		feed = {}
-		with open(rootpath + sep + "membership" + sep + "feed.json") as feedfile:
+		with open(rootpath + sep + "feed.json") as feedfile:
 			feed = json.load(feedfile)
 
 		if not ymd in feed["keys"]:
@@ -103,7 +102,7 @@ def main():
 
 			feed["entries"][ymd].append(subelement)
 
-		with open(rootpath + sep + "membership" + sep + "feed.json", "w") as feedfile:
+		with open(rootpath + sep + "feed.json", "w") as feedfile:
 			json.dump(feed, feedfile, indent=4, sort_keys=True)
 
 		print("Updated feed.json file.")
@@ -112,7 +111,7 @@ def main():
 	dataout["combined"] = combinedlist
 	dataout["combined_specific"] = combinedspecific
 
-	with open(rootpath + sep + "membership" + sep + "members.json", "w") as memberfile:
+	with open(rootpath + sep + "members.json", "w") as memberfile:
 		memberfile.write(json.dumps(dataout, indent=4))
 
 	print("Finished receiving Github Sponsors, Ko-Fi Members and Patreons.")

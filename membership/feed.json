@@ -209,6 +209,16 @@
                 "name": "Mr Krabs",
                 "platform": "patreon"
             }
+        ],
+        "20240220": [
+            {
+                "name": "Jack",
+                "platform": "patreon"
+            },
+            {
+                "name": "JackLiang12",
+                "platform": "github"
+            }
         ]
     },
     "keys": [
@@ -246,6 +256,7 @@
         "20230314",
         "20230509",
         "20230807",
-        "20230910"
+        "20230910",
+        "20240220"
     ]
 }
